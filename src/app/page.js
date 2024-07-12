@@ -1,7 +1,7 @@
 "use client";
 
 import { GlobalContext } from "@/context";
-import { getAllAdminProducts } from "@/services/product";
+// import { getAllAdminProducts } from "@/services/product";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
@@ -11,17 +11,17 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const router = useRouter();
 
-  async function getListOfProducts() {
-    const res = await getAllAdminProducts();
+  // async function getListOfProducts() {
+  //   const res = await getAllAdminProducts();
 
-    if (res.success) {
-      setProducts(res.data);
-    }
-  }
+  //   if (res.success) {
+  //     setProducts(res.data);
+  //   }
+  // }
 
-  useEffect(() => {
-    getListOfProducts();
-  }, []);
+  // useEffect(() => {
+  //   getListOfProducts();
+  // }, []);
 
   console.log(products);
 

@@ -33,25 +33,6 @@ export default function GlobalState({ children }) {
   const [isAuthUser, setIsAuthUser] = useState(null);
   const [user, setUser] = useState(null);
   const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
-  const [showCartModal, setShowCartModal] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [addresses, setAddresses] = useState([]);
-  const [addressFormData, setAddressFormData] = useState({
-    fullName: "",
-    city: "",
-    country: "",
-    postalCode: "",
-    address: "",
-  });
-
-  const [checkoutFormData, setCheckoutFormData] = useState(
-    initialCheckoutFormData
-  );
-
-  const [allOrdersForUser, setAllOrdersForUser] = useState([]);
-  const [orderDetails, setOrderDetails] = useState(null);
-  const [allOrdersForAllUsers, setAllOrdersForAllUsers] = useState([]);
-
   const router = useRouter();
   const pathName = usePathname();
 
@@ -107,22 +88,6 @@ export default function GlobalState({ children }) {
         setComponentLevelLoader,
         currentUpdatedProduct,
         setCurrentUpdatedProduct,
-        showCartModal,
-        setShowCartModal,
-        cartItems,
-        setCartItems,
-        addresses,
-        setAddresses,
-        addressFormData,
-        setAddressFormData,
-        checkoutFormData,
-        setCheckoutFormData,
-        allOrdersForUser,
-        setAllOrdersForUser,
-        orderDetails,
-        setOrderDetails,
-        allOrdersForAllUsers,
-        setAllOrdersForAllUsers,
       }}
     >
       {children}
