@@ -15,7 +15,7 @@ export const initialCheckoutFormData = {
   isProcessing: true,
 };
 
-const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view"];
+const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view", "profile"];
 
 const protectedAdminRoutes = [
   "/admin-view",
@@ -71,6 +71,7 @@ export default function GlobalState({ children }) {
   useEffect(() => {
     if (
       pathName !== "/register" &&
+      pathName !== "/profile" &&
       !pathName.includes("product") &&
       pathName !== "/" &&
       user &&

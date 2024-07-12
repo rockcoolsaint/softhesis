@@ -42,52 +42,45 @@ export default function Login() {
       : false;
   }
 
-  async function handleLogin() {
+  function handleLogin() {
     setComponentLevelLoader({ loading: true, id: "" });
-    const res = await login(formData);
 
     const validCredentials = [
       { password: 'password1', name: 'User One', email: 'user1@example.com' },
       { password: 'password2', name: 'User Two', email: 'user2@example.com' },
     ];
-
-    const user = validCredentials.find(
+    // console.log(`formData: ${formData.email}`)
+    // console.log(`initialFormData: ${initialFormdata.email}`)
+    const session_user = validCredentials.find(
       (cred) => cred.email === formData.email && cred.password === formData.password
     );
 
-    if (user) {
-      setUser(user);
-      setMessage('Login successful!');
-    } else {
-      setMessage('Invalid username or password.');
-    }
-
     // console.log(res);
-    console.log(user)
+    console.log(`session_user: ${session_user}`)
 
-    if (user) {
-      toast.success(message, {
+    if (session_user) {
+      toast.success('Login successful!', {
         position: toast.POSITION.TOP_RIGHT,
       });
       setIsAuthUser(true);
-      setUser(user);
+      setUser(session_user);
       setFormData(initialFormdata);
-      // Cookies.set("token", res?.finalData?.token);
-      // localStorage.setItem("user", JSON.stringify(res?.finalData?.user));
+      localStorage.setItem("user", JSON.stringify(session_user));
       setComponentLevelLoader({ loading: false, id: "" });
     } else {
-      toast.error(message, {
+      toast.error('Invalid username or password.', {
         position: toast.POSITION.TOP_RIGHT,
       });
       setIsAuthUser(false);
       setComponentLevelLoader({ loading: false, id: "" });
     }
   }
-
+  
+  console.log("====isAuth, user=====")
   console.log(isAuthUser, user);
 
   useEffect(() => {
-    if (isAuthUser) router.push("/");
+    if (isAuthUser) router.push("/dashboard");
   }, [isAuthUser]);
 
   return (

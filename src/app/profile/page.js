@@ -17,11 +17,12 @@ export default function Profile() {
   const [email, setEmail] = useState(user?.email || '');
   const [password, setPassword] = useState('');
   const [isUpdated, setIsUpdated] = useState(false);
-  const [formData, setFormData] = useState(user);
+  const [formData, setFormData] = useState(JSON.parse(localStorage.getItem("user")));
 
   const router = useRouter()
 
   console.log(formData);
+  // console.log(`user: ${user.email}`)
 
   function isFormValid() {
     return formData &&
@@ -40,15 +41,18 @@ export default function Profile() {
   async function handleUpdateOnSubmit() {
     setPageLevelLoader(true);
     // const data = await registerNewUser(formData);
-    const data = await updateUser(formData);
+    // const data = await updateUser(formData);
+    setUser({ ...user, name: formData.name, email: formData.email, password: formData.password || user.password });
 
-    if (data.success) {
-      toast.success(data.message, {
+    if (user) {
+      console.log(`user: ${user}`)
+      toast.success("Profile updated successfully!", {
         position: toast.POSITION.TOP_RIGHT,
       });
-      setIsRegistered(true);
+      setIsUpdated(true);
       setPageLevelLoader(false);
-      setFormData(initialFormData);
+      setFormData(user)
+      localStorage.setItem("user", JSON.stringify(formData));
     } else {
       toast.error(data.message, {
         position: toast.POSITION.TOP_RIGHT,
@@ -57,7 +61,7 @@ export default function Profile() {
       setFormData(initialFormData);
     }
 
-    console.log(data);
+    console.log(`user-again: ${user}`)
   }
 
   return (
@@ -103,7 +107,6 @@ export default function Profile() {
                   className=" disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
                   text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
                   "
-                  disabled={!isFormValid()}
                   onClick={handleUpdateOnSubmit}
                 >
                   {pageLevelLoader ? (

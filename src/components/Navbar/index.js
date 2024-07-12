@@ -100,17 +100,17 @@ export default function Navbar() {
                   className={
                     "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                   }
-                  onClick={()=>router.push('/account')}
+                  onClick={()=>router.push('/dashboard')}
                 >
-                  Account
+                  Dashboard
                 </button>
                 <button
                   className={
                     "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                   }
-                  onClick={()=> setShowCartModal(true)}
+                  onClick={()=> router.push('/profile')}
                 >
-                  Cart
+                  Edit Profile
                 </button>
               </Fragment>
             ) : null}
